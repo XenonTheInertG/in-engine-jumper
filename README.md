@@ -1,2 +1,5 @@
 # in-engine-jumper
-A jumper game made as an experiment as a Godot Game Engine Plugin (This is confusing right? Read README.md)
+
+A Godot Game Engine plugin that actually is a simple jumper game which runs as a Godot Dock.
+
+Note: This was only made for experimental purpose. This has bugs and is slow.
