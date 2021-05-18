@@ -1,0 +1,162 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/in-engine-jumper/Jumper_dock.gd" type="Script" id=1]
+[ext_resource path="res://addons/in-engine-jumper/sprites/player.png" type="Texture" id=2]
+[ext_resource path="res://addons/in-engine-jumper/player_node.gd" type="Script" id=3]
+[ext_resource path="res://addons/in-engine-jumper/sprites/enemy.png" type="Texture" id=4]
+[ext_resource path="res://addons/in-engine-jumper/enemy_node.gd" type="Script" id=5]
+[ext_resource path="res://addons/in-engine-jumper/player_static_col.gd" type="Script" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1, 90 )
+
+[node name="Jumper" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gaming_area" type="Panel" parent="."]
+margin_right = 256.0
+margin_bottom = 180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score_disp" type="Label" parent="gaming_area"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "12"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="note" type="Label" parent="gaming_area"]
+margin_left = 2.0
+margin_top = 214.0
+margin_right = 290.0
+margin_bottom = 279.0
+custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
+text = "BUG NOTE: Sometimes the reset button 
+does not work properly. Try pressing it once, 
+twice or a few times more to make it 
+work"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="roof" type="StaticBody2D" parent="gaming_area"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="roof" type="CollisionShape2D" parent="gaming_area/roof"]
+visible = false
+position = Vector2( 128, 0 )
+shape = SubResource( 1 )
+
+[node name="player_node" type="KinematicBody2D" parent="gaming_area"]
+position = Vector2( 128.075, 162.985 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="player" type="Sprite" parent="gaming_area/player_node"]
+texture = ExtResource( 2 )
+
+[node name="player_col" type="CollisionPolygon2D" parent="gaming_area/player_node"]
+visible = false
+polygon = PoolVector2Array( 4, -15, 7, -15, 7, -14, 8, -14, 8, -13, 10, -13, 10, -12, 11, -12, 11, -11, 12, -11, 12, -10, 13, -10, 13, -8, 14, -8, 14, -7, 15, -7, 15, -4, 16, -4, 16, 4, 15, 4, 15, 7, 14, 7, 14, 8, 13, 8, 13, 10, 12, 10, 12, 11, 11, 11, 11, 12, 10, 12, 10, 13, 8, 13, 8, 14, 7, 14, 7, 15, 4, 15, 4, 16, -4, 16, -4, 15, -7, 15, -7, 14, -8, 14, -8, 13, -10, 13, -10, 12, -11, 12, -11, 11, -12, 11, -12, 10, -13, 10, -13, 8, -14, 8, -14, 7, -15, 7, -15, 4, -16, 4, -16, -4, -15, -4, -15, -7, -14, -7, -14, -8, -13, -8, -13, -10, -12, -10, -12, -11, -11, -11, -11, -12, -10, -12, -10, -13, -8, -13, -8, -14, -7, -14, -7, -15, -4, -15, -4, -16, 4, -16 )
+
+[node name="enemy_node" type="KinematicBody2D" parent="gaming_area"]
+position = Vector2( 95.9201, 162.997 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="enemy" type="Sprite" parent="gaming_area/enemy_node"]
+texture = ExtResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="gaming_area/enemy_node"]
+visible = false
+polygon = PoolVector2Array( 4, -15, 7, -15, 7, -14, 8, -14, 8, -13, 10, -13, 10, -12, 11, -12, 11, -11, 12, -11, 12, -10, 13, -10, 13, -8, 14, -8, 14, -7, 15, -7, 15, -4, 16, -4, 16, 4, 15, 4, 15, 7, 14, 7, 14, 8, 13, 8, 13, 10, 12, 10, 12, 11, 11, 11, 11, 12, 10, 12, 10, 13, 8, 13, 8, 14, 7, 14, 7, 15, 4, 15, 4, 16, -4, 16, -4, 15, -7, 15, -7, 14, -8, 14, -8, 13, -10, 13, -10, 12, -11, 12, -11, 11, -12, 11, -12, 10, -13, 10, -13, 8, -14, 8, -14, 7, -15, 7, -15, 4, -16, 4, -16, -4, -15, -4, -15, -7, -14, -7, -14, -8, -13, -8, -13, -10, -12, -10, -12, -11, -11, -11, -11, -12, -10, -12, -10, -13, -8, -13, -8, -14, -7, -14, -7, -15, -4, -15, -4, -16, 4, -16 )
+
+[node name="enemy_area" type="Area2D" parent="gaming_area/enemy_node"]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="gaming_area/enemy_node/enemy_area"]
+visible = false
+polygon = PoolVector2Array( 4, -15, 7, -15, 7, -14, 8, -14, 8, -13, 10, -13, 10, -12, 11, -12, 11, -11, 12, -11, 12, -10, 13, -10, 13, -8, 14, -8, 14, -7, 15, -7, 15, -4, 16, -4, 16, 4, 15, 4, 15, 7, 14, 7, 14, 8, 13, 8, 13, 10, 12, 10, 12, 11, 11, 11, 11, 12, 10, 12, 10, 13, 8, 13, 8, 14, 7, 14, 7, 15, 4, 15, 4, 16, -4, 16, -4, 15, -7, 15, -7, 14, -8, 14, -8, 13, -10, 13, -10, 12, -11, 12, -11, 11, -12, 11, -12, 10, -13, 10, -13, 8, -14, 8, -14, 7, -15, 7, -15, 4, -16, 4, -16, -4, -15, -4, -15, -7, -14, -7, -14, -8, -13, -8, -13, -10, -12, -10, -12, -11, -11, -11, -11, -12, -10, -12, -10, -13, -8, -13, -8, -14, -7, -14, -7, -15, -4, -15, -4, -16, 4, -16 )
+
+[node name="ground" type="StaticBody2D" parent="gaming_area"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="ground_col" type="CollisionShape2D" parent="gaming_area/ground"]
+visible = false
+position = Vector2( 128, 180 )
+shape = SubResource( 1 )
+
+[node name="wall0" type="StaticBody2D" parent="gaming_area"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="wall" type="CollisionShape2D" parent="gaming_area/wall0"]
+visible = false
+position = Vector2( 0, 90 )
+shape = SubResource( 2 )
+
+[node name="wall256" type="StaticBody2D" parent="gaming_area"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="wall2" type="CollisionShape2D" parent="gaming_area/wall256"]
+visible = false
+position = Vector2( 256, 90 )
+shape = SubResource( 2 )
+
+[node name="player_static_col" type="StaticBody2D" parent="."]
+position = Vector2( 128.075, 162.985 )
+collision_layer = 2
+collision_mask = 2147483650
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="player_col2" type="CollisionPolygon2D" parent="player_static_col"]
+visible = false
+polygon = PoolVector2Array( 4, -15, 7, -15, 7, -14, 8, -14, 8, -13, 10, -13, 10, -12, 11, -12, 11, -11, 12, -11, 12, -10, 13, -10, 13, -8, 14, -8, 14, -7, 15, -7, 15, -4, 16, -4, 16, 4, 15, 4, 15, 7, 14, 7, 14, 8, 13, 8, 13, 10, 12, 10, 12, 11, 11, 11, 11, 12, 10, 12, 10, 13, 8, 13, 8, 14, 7, 14, 7, 15, 4, 15, 4, 16, -4, 16, -4, 15, -7, 15, -7, 14, -8, 14, -8, 13, -10, 13, -10, 12, -11, 12, -11, 11, -12, 11, -12, 10, -13, 10, -13, 8, -14, 8, -14, 7, -15, 7, -15, 4, -16, 4, -16, -4, -15, -4, -15, -7, -14, -7, -14, -8, -13, -8, -13, -10, -12, -10, -12, -11, -11, -11, -11, -12, -10, -12, -10, -13, -8, -13, -8, -14, -7, -14, -7, -15, -4, -15, -4, -16, 4, -16 )
+
+[node name="reset_button" type="Button" parent="."]
+margin_left = 110.562
+margin_top = 186.89
+margin_right = 158.562
+margin_bottom = 206.89
+text = "RESET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="jump_button" type="Button" parent="."]
+margin_left = 58.9056
+margin_top = 188.15
+margin_right = 106.906
+margin_bottom = 208.15
+text = "JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="kill_player" from="gaming_area/enemy_node" to="player_static_col" method="_on_enemy_node_kill_player"]
+[connection signal="pressed" from="reset_button" to="." method="_on_reset_button_pressed"]
+[connection signal="button_down" from="jump_button" to="gaming_area/player_node" method="_on_jump_button_button_down"]
+[connection signal="button_up" from="jump_button" to="gaming_area/player_node" method="_on_jump_button_button_up"]
